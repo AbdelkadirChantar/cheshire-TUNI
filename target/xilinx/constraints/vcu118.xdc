@@ -32,7 +32,7 @@ set_false_path -hold -setup -through $MIG_RST_I
 # Do not time asynchrous IO paths
 set_false_path -from [get_ports sys_reset];
 set_false_path -from [get_ports sys_resetn];
-set_false_path -from [get_ports jtag_trst_i];
+set_false_path -from [get_ports jtag_trst_ni];
 set_false_path -from [get_ports uart_rx_i];
 set_false_path -to   [get_ports uart_tx_o];
 
@@ -65,10 +65,10 @@ set_property -dict { PACKAGE_PIN BB21   IOSTANDARD LVCMOS18 } [get_ports uart_tx
 
 # Jtag GPIOs goes to the FMC XM105 where the debug cable is connected (example Digilent HS2)
 set_property -dict {PACKAGE_PIN AU16 IOSTANDARD LVCMOS18} [get_ports jtag_tck_i  ]; # "PMOD0 - PIN4"
-set_property -dict {PACKAGE_PIN AV16 IOSTANDARD LVCMOS18} [get_ports jtag_td_i   ]; # "PMOD0 - PIN2"
-set_property -dict {PACKAGE_PIN AT15 IOSTANDARD LVCMOS18} [get_ports jtag_td_o   ]; # "PMOD0 - PIN6"
+set_property -dict {PACKAGE_PIN AV16 IOSTANDARD LVCMOS18} [get_ports jtag_tdi_i   ]; # "PMOD0 - PIN2"
+set_property -dict {PACKAGE_PIN AT15 IOSTANDARD LVCMOS18} [get_ports jtag_tdo_o   ]; # "PMOD0 - PIN6"
 set_property -dict {PACKAGE_PIN AT16 IOSTANDARD LVCMOS18} [get_ports jtag_tms_i  ]; # "PMOD0 - PIN8"
-set_property -dict {PACKAGE_PIN BB24 IOSTANDARD LVCMOS18} [get_ports jtag_trst_i ]; # "PUSH_BTN SW10 - NORTH"
+set_property -dict {PACKAGE_PIN BB24 IOSTANDARD LVCMOS18} [get_ports jtag_trst_ni ]; # "PUSH_BTN SW10 - NORTH"
 
 # Clock diff @ 125MHz
 set_property -dict {PACKAGE_PIN AY24 IOSTANDARD LVDS} [get_ports sys_clk_p]; # "CLK_125MHZ_P"
