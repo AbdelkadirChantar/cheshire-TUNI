@@ -39,7 +39,7 @@ CHS_XILINX_BOARDS := genesys2 vcu128 vcu118
 
 CHS_XILINX_IPS_genesys2 := clkwiz vio mig7s
 CHS_XILINX_IPS_vcu128   := clkwiz vio ddr4
-CHS_XILINX_IPS_vcu118   := clkwiz vio 
+CHS_XILINX_IPS_vcu118   := clkwiz vio ddr4
 
 $(CHS_XILINX_DIR)/scripts/add_sources.%.tcl: $(CHS_ROOT)/Bender.yml
 	$(BENDER) script vivado -t fpga -t cv64a6_imafdcsclic_sv39 -t cva6 -t $* > $@
@@ -91,3 +91,4 @@ $(eval $(call chs_xilinx_util_rule,program,$(CHS_XILINX_DIR)/out/cheshire.%.bit)
 # `%` is substituted with the board name. The default is the Linux disk image for that board.
 CHS_XILINX_FLASH_IMG ?= $(CHS_SW_DIR)/boot/linux.%.gpt.bin
 $(eval $(call chs_xilinx_util_rule,flash,$(CHS_XILINX_FLASH_IMG)))
+
