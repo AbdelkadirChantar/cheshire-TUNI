@@ -8,7 +8,7 @@
 # Sys Clock #
 #############
 
-# 100 MHz input clock
+# 125 MHz input clock
 set SYS_TCK 8
 create_clock -period $SYS_TCK -name sys_clk [get_ports sys_clk_p]
 
