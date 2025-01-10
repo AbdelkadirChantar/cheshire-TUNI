@@ -147,10 +147,10 @@ module cheshire_top_xilinx import cheshire_pkg::*; (
   // Select SoC reset
 `ifdef USE_RESET
   logic sys_resetn;
-  assign sys_resetn = ~sys_reset;
+  assign sys_resetn = sys_reset;
 `elsif USE_RESETN
   logic sys_reset;
-  assign sys_reset  = ~sys_resetn;
+  assign sys_reset  = sys_resetn;
 `endif
 
   // Tie off inputs of no switches

@@ -75,7 +75,14 @@ set_property -dict {PACKAGE_PIN AY24 IOSTANDARD LVDS} [get_ports sys_clk_p]; # "
 set_property -dict {PACKAGE_PIN AY23 IOSTANDARD LVDS} [get_ports sys_clk_n]; # "CLK_125MHZ_N"
 
 
-# Active low reset
-set_property -dict {PACKAGE_PIN L19 IOSTANDARD LVCMOS12} [get_ports sys_resetn]; 
+set_property -dict {PACKAGE_PIN BF22 IOSTANDARD LVCMOS12} [get_ports boot_mode_i[0]]; # SW 9
+set_property -dict {PACKAGE_PIN BE23 IOSTANDARD LVCMOS12} [get_ports boot_mode_i[1]]; # SW 6
+
+
+# Active high reset
+set_property -dict {PACKAGE_PIN BE22 IOSTANDARD LVCMOS12} [get_ports sys_resetn]; # SW 17
 
 # tclint-enable line-length, spacing
+
+
+
