@@ -42,9 +42,14 @@ module tb_cheshire_soc #(
       // Idle boot: preload with the specified mode
       case (preload_mode)
         0: begin      // JTAG
-          fix.vip.jtag_init();
-          fix.vip.jtag_elf_run(preload_elf);
-          fix.vip.jtag_wait_for_eoc(exit_code);
+          if(preload_elf == "") begin
+            fix.vip.jtag_init();
+            wait (10us);
+          end else begin
+            fix.vip.jtag_init();
+            fix.vip.jtag_elf_run(preload_elf);
+            fix.vip.jtag_wait_for_eoc(exit_code);
+          end
         end 1: begin  // Serial Link
           fix.vip.slink_elf_run(preload_elf);
           fix.vip.slink_wait_for_eoc(exit_code);
