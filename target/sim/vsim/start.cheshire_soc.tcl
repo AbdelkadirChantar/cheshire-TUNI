@@ -21,6 +21,15 @@ if { ![info exists CXX_PATH] } {
     set CXX_PATH [exec which $CXX]
 }
 
+
+# generate vsim compilation from bender
+if {![file exists "compile.cheshire_soc.tcl"]} {
+  exec bender script vsim > compile.cheshire_soc.tcl
+}
+
+source compile.cheshire_soc.tcl
+
+
 # Set voptargs only if not already set to make overridable.
 # Default on fast simulation flags.
 if { ![info exists VOPTARGS] } {
