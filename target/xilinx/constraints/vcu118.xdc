@@ -64,6 +64,13 @@ set_property -dict { PACKAGE_PIN AW25   IOSTANDARD LVCMOS18 } [get_ports uart_rx
 set_property -dict { PACKAGE_PIN BB21   IOSTANDARD LVCMOS18 } [get_ports uart_tx_o ]; # "USB UART Tx"
 
 # Jtag GPIOs goes to the FMC XM105 where the debug cable is connected (example Digilent HS2)
+set_property -dict {PACKAGE_PIN A23 IOSTANDARD LVCMOS18}  [get_ports jtag_gnd_o] ;# A23 - C15 (FMCP_HSPC_LA10_N) - J1.04 - GND
+
+
+set_property PACKAGE_PIN B23     [get_ports jtag_vdd_o] ;# B23 - C14 (FMCP_HSPC_LA10_P) - J1.02 - VDD
+set_property -dict {PACKAGE_PIN B23 IOSTANDARD LVCMOS18}  [get_ports jtag_vdd_o] ;# B23 - C14 (FMCP_HSPC_LA10_P) - J1.02 - VDD
+
+
 set_property -dict {PACKAGE_PIN AU16 IOSTANDARD LVCMOS18} [get_ports jtag_tck_i  ]; # "PMOD0 - PIN4"
 set_property -dict {PACKAGE_PIN AV16 IOSTANDARD LVCMOS18} [get_ports jtag_tdi_i   ]; # "PMOD0 - PIN2"
 set_property -dict {PACKAGE_PIN AT15 IOSTANDARD LVCMOS18} [get_ports jtag_tdo_o   ]; # "PMOD0 - PIN6"
