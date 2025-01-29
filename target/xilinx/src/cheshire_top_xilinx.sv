@@ -90,8 +90,21 @@ module cheshire_top_xilinx import cheshire_pkg::*; (
   input  logic  uart_rx_i,
 
   inout  wire [UsbNumPorts-1:0] usb_dm_io,
-  inout  wire [UsbNumPorts-1:0] usb_dp_io
+  inout  wire [UsbNumPorts-1:0] usb_dp_io,
+
+  // PMOD output for level shifting for VCU118
+  output logic pmod_o
 );
+
+
+  ////////////////////////////////////
+  //  Logic-level Voltage Shifting  //
+  ////////////////////////////////////
+
+  // constant 1 on PMOD output
+  assign pmod_o = 1'b1;
+
+
 
   ///////////////////////
   //  Cheshire Config  //

@@ -89,6 +89,10 @@ set_property -dict {PACKAGE_PIN BE23 IOSTANDARD LVCMOS12} [get_ports boot_mode_i
 # Active high reset
 set_property -dict {PACKAGE_PIN BE22 IOSTANDARD LVCMOS12} [get_ports sys_resetn]; # SW 17
 
+## SCALAR SIGNALS
+set_property -dict {PACKAGE_PIN AY14 IOSTANDARD LVCMOS18} [get_ports pmod_o ]; # "PMOD0 - PIN1"
+
+
 # tclint-enable line-length, spacing
 
 
