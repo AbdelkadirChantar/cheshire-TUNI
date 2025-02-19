@@ -40,6 +40,8 @@ switch $proj {
             }
 
             vcu118 {set_property -dict [list CONFIG.C0.DDR4_Clamshell {true} CONFIG.C0.DDR4_InputClockPeriod {8000} CONFIG.C0.DDR4_CLKOUT0_DIVIDE {3} CONFIG.C0.DDR4_DataWidth {72} CONFIG.C0.DDR4_DataMask {NO_DM_NO_DBI} CONFIG.C0.DDR4_Ecc {true} CONFIG.C0.DDR4_AxiSelection {true} CONFIG.C0.DDR4_AxiDataWidth {512} CONFIG.C0.DDR4_AxiAddressWidth {32} CONFIG.C0.DDR4_AxiIDWidth {8} CONFIG.C0.DDR4_isCustom {false} CONFIG.C0.CS_WIDTH {2}] [get_ips $proj]}
+            
+            zcu104 {set_property -dict [list CONFIG.C0.DDR4_Clamshell {true} CONFIG.C0.DDR4_InputClockPeriod {8000} CONFIG.C0.DDR4_CLKOUT0_DIVIDE {3} CONFIG.C0.DDR4_DataWidth {72} CONFIG.C0.DDR4_DataMask {NO_DM_NO_DBI} CONFIG.C0.DDR4_Ecc {true} CONFIG.C0.DDR4_AxiSelection {true} CONFIG.C0.DDR4_AxiDataWidth {512} CONFIG.C0.DDR4_AxiAddressWidth {32} CONFIG.C0.DDR4_AxiIDWidth {8} CONFIG.C0.DDR4_isCustom {false} CONFIG.C0.CS_WIDTH {2}] [get_ips $proj]}
 
             default { nocfgexit $proj $board }
         }
@@ -155,6 +157,42 @@ switch $proj {
                     CONFIG.CLKOUT4_PHASE_ERROR {89.971} \
                     ] [get_ips $proj]
             }
+            zcu104 {
+                set_property -dict [list \
+                    CONFIG.CLK_IN1_BOARD_INTERFACE {Custom} \
+                    CONFIG.RESET_BOARD_INTERFACE {Custom} \
+                    CONFIG.USE_RESET {true} \
+                    CONFIG.PRIM_SOURCE {No_buffer} \
+                    CONFIG.PRIM_IN_FREQ {125.000} \
+                    CONFIG.CLKOUT1_USED {true} \
+                    CONFIG.CLKOUT2_USED {true} \
+                    CONFIG.CLKOUT3_USED {true} \
+                    CONFIG.CLKOUT4_USED {true} \
+                    CONFIG.CLK_OUT1_PORT {clk_50} \
+                    CONFIG.CLK_OUT2_PORT {clk_48} \
+                    CONFIG.CLK_OUT3_PORT {clk_20} \
+                    CONFIG.CLK_OUT4_PORT {clk_10} \
+                    CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {50.000} \
+                    CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {48.000} \
+                    CONFIG.CLKOUT3_REQUESTED_OUT_FREQ {20.000} \
+                    CONFIG.CLKOUT4_REQUESTED_OUT_FREQ {10.000} \
+                    CONFIG.MMCM_CLKFBOUT_MULT_F {12.000} \
+                    CONFIG.MMCM_CLKIN1_PERIOD {5.000} \
+                    CONFIG.MMCM_CLKOUT1_DIVIDE {24} \
+                    CONFIG.MMCM_CLKOUT2_DIVIDE {25} \
+                    CONFIG.MMCM_CLKOUT3_DIVIDE {60} \
+                    CONFIG.MMCM_CLKOUT4_DIVIDE {120} \
+                    CONFIG.NUM_OUT_CLKS {4} \
+                    CONFIG.CLKOUT1_JITTER {112.316} \
+                    CONFIG.CLKOUT1_PHASE_ERROR {89.971} \
+                    CONFIG.CLKOUT2_JITTER {129.198} \
+                    CONFIG.CLKOUT2_PHASE_ERROR {89.971} \
+                    CONFIG.CLKOUT3_JITTER {155.330} \
+                    CONFIG.CLKOUT3_PHASE_ERROR {89.971} \
+                    CONFIG.CLKOUT4_JITTER {178.053} \
+                    CONFIG.CLKOUT4_PHASE_ERROR {89.971} \
+                    ] [get_ips $proj]
+            }
             default { nocfgexit $proj $board }
         }
     }
@@ -185,6 +223,17 @@ switch $proj {
                     ] [get_ips $proj]
             }
             vcu118 {
+                set_property -dict [list \
+                    CONFIG.C_NUM_PROBE_OUT {3} \
+                    CONFIG.C_PROBE_OUT0_INIT_VAL {0x0} \
+                    CONFIG.C_PROBE_OUT1_INIT_VAL {0x2} \
+                    CONFIG.C_PROBE_OUT2_INIT_VAL {0x1} \
+                    CONFIG.C_PROBE_OUT1_WIDTH {2} \
+                    CONFIG.C_EN_PROBE_IN_ACTIVITY {0} \
+                    CONFIG.C_NUM_PROBE_IN {0} \
+                    ] [get_ips $proj]
+            }
+            zcu104 {
                 set_property -dict [list \
                     CONFIG.C_NUM_PROBE_OUT {3} \
                     CONFIG.C_PROBE_OUT0_INIT_VAL {0x0} \

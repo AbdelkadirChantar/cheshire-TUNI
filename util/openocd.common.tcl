@@ -16,6 +16,9 @@ jtag newtap $_CHIPNAME cpu -irlen ${irlen} -expected-id 0x1c5e5db3
 set _TARGETNAME $_CHIPNAME.cpu
 target create $_TARGETNAME riscv -chain-position $_TARGETNAME 
 
+# gdb report_data_abort enable
+# gdb report_register_access_error enable
+
 gdb report_data_abort enable
 gdb report_register_access_error enable
 

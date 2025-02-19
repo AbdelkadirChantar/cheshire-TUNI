@@ -8,6 +8,26 @@
 # Sys Clock #
 #############
 
+
+### JTAG Clock @ 8MHz
+create_clock -period 125.000 -name jtag_tck -waveform {0.000 62.500} [get_ports jtag_tck_i]; # 8MHz
+set_input_jitter jtag_tck 1.000;
+
+
+# DRC Failure occurs when placer attempts to place BUFG and BUFGCTRL in same CR. 
+# the following constraint provides permission to use global routing resources to cross CRs.
+set_property CLOCK_DEDICATED_ROUTE ANY_CMT_COLUMN [get_nets -of [get_ports jtag_tck_i]];
+
+
+## Minimize routing delay from IO -> cells by increasing external delay
+set_input_delay  -clock jtag_tck -clock_fall 5.000 [get_ports jtag_tdi_i];
+set_input_delay  -clock jtag_tck -clock_fall 5.000 [get_ports jtag_tms_i];
+set_output_delay -clock jtag_tck             5.000 [get_ports jtag_tdo_o];
+
+set_max_delay -to   [get_ports jtag_tdo_o] 20.000;
+set_max_delay -from [get_ports jtag_tms_i] 20.000;
+set_max_delay -from [get_ports jtag_tdi_i] 20.000;
+
 # 125 MHz input clock
 set SYS_TCK 8
 create_clock -period $SYS_TCK -name sys_clk [get_ports sys_clk_p]
@@ -16,6 +36,14 @@ create_clock -period $SYS_TCK -name sys_clk [get_ports sys_clk_p]
 set SOC_TCK 20.0
 set soc_clk [get_clocks -of_objects [get_pins i_clkwiz/clk_50]]
 set_property CLOCK_DEDICATED_ROUTE BACKBONE [get_nets soc_clk]
+
+
+# Prevent timing analysis between asynchronous clocks which have correctly implement CDC constructs in place
+set_clock_groups -asynchronous \
+  -group [get_clocks -of_objects [get_pins i_clkwiz/clk_50]] \
+  -group {jtag_tck}
+
+
 
 #######
 # MIG #
@@ -60,20 +88,20 @@ set_max_delay -datapath_only \
 
 # tclint-disable line-length, spacing
 
-set_property -dict { PACKAGE_PIN AW25   IOSTANDARD LVCMOS18 } [get_ports uart_rx_i ]; # "USB UART Rx"
-set_property -dict { PACKAGE_PIN BB21   IOSTANDARD LVCMOS18 } [get_ports uart_tx_o ]; # "USB UART Tx"
+set_property -dict { PACKAGE_PIN J9   IOSTANDARD LVCMOS33 } [get_ports uart_rx_i ]; # "USB UART Rx"
+set_property -dict { PACKAGE_PIN K9   IOSTANDARD LVCMOS33 } [get_ports uart_tx_o ]; # "USB UART Tx"
 
 # Jtag GPIOs goes to the FMC XM105 where the debug cable is connected (example Digilent HS2)
 
-set_property -dict {PACKAGE_PIN AU16 IOSTANDARD LVCMOS18} [get_ports jtag_tck_i  ]; # "PMOD0 - PIN4"
-set_property -dict {PACKAGE_PIN AV16 IOSTANDARD LVCMOS18} [get_ports jtag_tdi_i   ]; # "PMOD0 - PIN2"
-set_property -dict {PACKAGE_PIN AT15 IOSTANDARD LVCMOS18} [get_ports jtag_tdo_o   ]; # "PMOD0 - PIN6"
-set_property -dict {PACKAGE_PIN AT16 IOSTANDARD LVCMOS18} [get_ports jtag_tms_i  ]; # "PMOD0 - PIN8"
-set_property -dict {PACKAGE_PIN BB24 IOSTANDARD LVCMOS18} [get_ports jtag_trst_ni ]; # "PUSH_BTN SW10 - NORTH"
+set_property -dict {PACKAGE_PIN G8 IOSTANDARD LVCMOS33} [get_ports jtag_tck_i  ];  # "PMOD0 - PIN0"  -  BD0
+set_property -dict {PACKAGE_PIN H8 IOSTANDARD LVCMOS33} [get_ports jtag_tdi_i   ]; # "PMOD0 - PIN1" -  BD1 
+set_property -dict {PACKAGE_PIN G7 IOSTANDARD LVCMOS33} [get_ports jtag_tdo_o   ]; # "PMOD0 - PIN2" -  BD2  
+set_property -dict {PACKAGE_PIN H7 IOSTANDARD LVCMOS33} [get_ports jtag_tms_i  ];  # "PMOD0 - PIN3"  -  BD3 
+set_property -dict {PACKAGE_PIN D4 IOSTANDARD LVCMOS33} [get_ports jtag_trst_ni ]; # "PUSH_BTN SW10 - NORTH" //
 
 # Clock diff @ 125MHz
-set_property -dict {PACKAGE_PIN AY24 IOSTANDARD LVDS} [get_ports sys_clk_p]; # "CLK_125MHZ_P"
-set_property -dict {PACKAGE_PIN AY23 IOSTANDARD LVDS} [get_ports sys_clk_n]; # "CLK_125MHZ_N"
+set_property -dict {PACKAGE_PIN F23 IOSTANDARD LVDS} [get_ports sys_clk_p]; # "CLK_125MHZ_P"
+set_property -dict {PACKAGE_PIN E23 IOSTANDARD LVDS} [get_ports sys_clk_n]; # "CLK_125MHZ_N"
 
 
 # set_property -dict {PACKAGE_PIN BF22 IOSTANDARD LVCMOS12} [get_ports boot_mode_i[0]]; # SW 9
@@ -81,10 +109,10 @@ set_property -dict {PACKAGE_PIN AY23 IOSTANDARD LVDS} [get_ports sys_clk_n]; # "
 
 
 # Active high reset
-set_property -dict {PACKAGE_PIN BE22 IOSTANDARD LVCMOS18} [get_ports sys_resetn]; # SW 17
+set_property -dict {PACKAGE_PIN E4 IOSTANDARD LVCMOS33} [get_ports sys_resetn]; # SW 17
 
 ## SCALAR SIGNALS
-set_property -dict {PACKAGE_PIN AY15 IOSTANDARD LVCMOS18} [get_ports pmod_o ]; # "PMOD0_1 - PIN3"
+# set_property -dict {PACKAGE_PIN AY15 IOSTANDARD LVCMOS18} [get_ports pmod_o ]; # "PMOD0_1 - PIN3"
 
 
 # tclint-enable line-length, spacing
