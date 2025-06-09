@@ -47,7 +47,7 @@ _start:
     li x31, 0
 
     // Pause SMP harts
-    smp_pause(t0, t1)
+    //smp_pause(t0, t1)
 
     // Init stack and global pointer with safe, linked values
     la sp, __stack_pointer$
@@ -94,7 +94,7 @@ boot_next_stage:
     sw a0, 20(t0)   // regs.SCRATCH[5]
     fence
     // Resume SMP harts
-    smp_resume(t0, t1, t2)
+    //smp_resume(t0, t1, t2)
     // Load boot address from global scratch registers
     la t0, __base_regs
     lwu t1, 20(t0)  // regs.SCRATCH[5]
