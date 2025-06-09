@@ -620,7 +620,7 @@ package cheshire_pkg;
     DbgAmoNumCuts     : 1,
     DbgAmoPostCut     : 1,
     // LLC: 128 KiB, up to 2 GiB DRAM
-    LlcNotBypass      : 1,
+    LlcNotBypass      : 0,
     LlcSetAssoc       : 8,
     LlcNumLines       : 256,
     LlcNumBlocks      : 8,
