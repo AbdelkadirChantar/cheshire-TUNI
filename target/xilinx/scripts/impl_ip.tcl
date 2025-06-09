@@ -16,6 +16,7 @@ switch $proj {
     
     ddr4 {
         create_ip -name ddr4 -vendor xilinx.com -library ip -version 2.2 -module_name $proj
+
         switch $board {
             vcu128 {
                 set_property -dict [list \
@@ -39,10 +40,10 @@ switch $proj {
                     ] [get_ips $proj]
             }
 
-            vcu118 {set_property -dict [list CONFIG.C0.DDR4_Clamshell {true} CONFIG.C0.DDR4_InputClockPeriod {8000} CONFIG.C0.DDR4_CLKOUT0_DIVIDE {3} CONFIG.C0.DDR4_DataWidth {72} CONFIG.C0.DDR4_DataMask {NO_DM_NO_DBI} CONFIG.C0.DDR4_Ecc {true} CONFIG.C0.DDR4_AxiSelection {true} CONFIG.C0.DDR4_AxiDataWidth {512} CONFIG.C0.DDR4_AxiAddressWidth {32} CONFIG.C0.DDR4_AxiIDWidth {8} CONFIG.C0.DDR4_isCustom {false} CONFIG.C0.CS_WIDTH {2}] [get_ips $proj]}
+            vcu118 {set_property -dict [list CONFIG.C0.DDR4_Clamshell {true} CONFIG.System_Clock {No_Buffer} CONFIG.Reference_Clock {No_Buffer} CONFIG.C0.DDR4_InputClockPeriod {8000} CONFIG.C0.DDR4_CLKOUT0_DIVIDE {3} CONFIG.C0.DDR4_DataWidth {72} CONFIG.C0.DDR4_DataMask {NO_DM_NO_DBI} CONFIG.C0.DDR4_Ecc {true} CONFIG.C0.DDR4_AxiSelection {true} CONFIG.C0.DDR4_AxiDataWidth {512} CONFIG.C0.DDR4_AxiAddressWidth {32} CONFIG.C0.DDR4_AxiIDWidth {8} CONFIG.C0.DDR4_isCustom {false} CONFIG.C0.CS_WIDTH {2}] [get_ips $proj]}
             
-            zcu104 {set_property -dict [list CONFIG.C0.DDR4_Clamshell {true} CONFIG.C0.DDR4_InputClockPeriod {8000} CONFIG.C0.DDR4_CLKOUT0_DIVIDE {3} CONFIG.C0.DDR4_DataWidth {72} CONFIG.C0.DDR4_DataMask {NO_DM_NO_DBI} CONFIG.C0.DDR4_Ecc {true} CONFIG.C0.DDR4_AxiSelection {true} CONFIG.C0.DDR4_AxiDataWidth {512} CONFIG.C0.DDR4_AxiAddressWidth {32} CONFIG.C0.DDR4_AxiIDWidth {8} CONFIG.C0.DDR4_isCustom {false} CONFIG.C0.CS_WIDTH {2}] [get_ips $proj]}
-
+            zcu104 {set_property -dict [list CONFIG.C0.DDR4_Clamshell {false} CONFIG.System_Clock {Differential} CONFIG.Reference_Clock {Differential} CONFIG.C0_CLOCK_BOARD_INTERFACE {clk_300mhz} CONFIG.C0.DDR4_InputClockPeriod {3335} CONFIG.C0.DDR4_TimePeriod {938} CONFIG.C0.DDR4_CLKOUT0_DIVIDE {6} CONFIG.C0.DDR4_DataWidth {64} CONFIG.C0.DDR4_DataMask {DM_NO_DBI} CONFIG.C0.DDR4_Ecc {false} CONFIG.C0.DDR4_AxiSelection {true} CONFIG.C0.DDR4_AxiDataWidth {64} CONFIG.C0.DDR4_AxiAddressWidth {32} CONFIG.C0.DDR4_AxiIDWidth {4} CONFIG.ADDN_UI_CLKOUT1_FREQ_HZ {100} CONFIG.C0.BANK_GROUP_WIDTH {2} CONFIG.C0.DDR4_isCustom {false} CONFIG.C0.CS_WIDTH {1}] [get_ips $proj]}
+            
             default { nocfgexit $proj $board }
         }
     }
@@ -157,6 +158,7 @@ switch $proj {
                     CONFIG.CLKOUT4_PHASE_ERROR {89.971} \
                     ] [get_ips $proj]
             }
+            
             zcu104 {
                 set_property -dict [list \
                     CONFIG.CLK_IN1_BOARD_INTERFACE {Custom} \
@@ -193,6 +195,7 @@ switch $proj {
                     CONFIG.CLKOUT4_PHASE_ERROR {89.971} \
                     ] [get_ips $proj]
             }
+            
             default { nocfgexit $proj $board }
         }
     }
