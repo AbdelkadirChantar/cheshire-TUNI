@@ -178,7 +178,8 @@ switch $proj {
                     CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {48.000} \
                     CONFIG.CLKOUT3_REQUESTED_OUT_FREQ {20.000} \
                     CONFIG.CLKOUT4_REQUESTED_OUT_FREQ {10.000} \
-                    CONFIG.MMCM_CLKFBOUT_MULT_F {12.000} \
+                    CONFIG.CLKIN1_JITTER_PS {50.0} \
+                    CONFIG.MMCM_CLKFBOUT_MULT_F {6.000} \
                     CONFIG.MMCM_CLKIN1_PERIOD {5.000} \
                     CONFIG.MMCM_CLKOUT1_DIVIDE {24} \
                     CONFIG.MMCM_CLKOUT2_DIVIDE {25} \
