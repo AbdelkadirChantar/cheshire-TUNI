@@ -16,8 +16,8 @@
 `define USE_JTAG   1
 `define USE_JTAG_TRSTN 1
 // `define USE_JTAG_VDDGND 1
- `define USE_DDR4 1
-
+`define USE_DDR4 1
+`define TARGET_ZCU104 1
 
 // TODO: Expose more IO: unused SPI CS, Serial Link, etc.
 
@@ -79,9 +79,10 @@ module cheshire_top_xilinx import cheshire_pkg::*; (
   output logic [4:0]  vga_blue_o,
 `endif
 
-`ifdef USE_DDR4
-  `DDR4_INTF
+`ifdef TARGET_ZCU104
+  `TARGET_ZCU104_INTF
 `endif
+
 `ifdef USE_DDR3
   `DDR3_INTF
 `endif
