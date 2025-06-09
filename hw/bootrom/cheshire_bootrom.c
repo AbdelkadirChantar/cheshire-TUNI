@@ -23,12 +23,12 @@ extern int boot_next_stage(void *);
 
 int boot_passive(uint64_t core_freq) {
     // Initialize UART with debug settings
-    uart_debug_init(&__base_uart, core_freq);
+    //uart_debug_init(&__base_uart, core_freq);
     // scratch[0] provides an entry point, scratch[1] a start signal
     volatile uint32_t *scratch = reg32(&__base_regs, CHESHIRE_SCRATCH_0_REG_OFFSET);
     // While we poll bit 2 of scratch[2], check for incoming UART debug requests
-    while (!(scratch[2] & 2))
-        if (uart_debug_check(&__base_uart)) return uart_debug_serve(&__base_uart);
+    //while (!(scratch[2] & 2))
+    //    if (uart_debug_check(&__base_uart)) return uart_debug_serve(&__base_uart);
     // No UART (or JTAG) requests came in, but scratch[2][2] was set --> run code at scratch[1:0]
     scratch[2] = 0;
     return boot_next_stage((void *)(uintptr_t)(((uint64_t)scratch[1] << 32) | scratch[0]));
