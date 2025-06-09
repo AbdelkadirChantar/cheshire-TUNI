@@ -110,7 +110,7 @@ endef
 $(foreach link,$(patsubst $(CHS_SW_LD_DIR)/%.ld,%,$(wildcard $(CHS_SW_LD_DIR)/*.ld)),$(eval $(call chs_sw_ld_elf_rule,$(link))))
 
 %.dump: %.elf
-	$(CHS_SW_OBJDUMP) -d -S $< > $@
+	$(CHS_SW_OBJDUMP) -d -S -h $< > $@
 
 %.bin: %.elf
 	$(CHS_SW_OBJCOPY) -O binary $< $@
