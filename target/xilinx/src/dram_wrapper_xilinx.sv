@@ -26,10 +26,12 @@ module dram_wrapper_xilinx #(
   // Controller reset
   input  logic  soc_resetn_i,
   input  logic  soc_clk_i,
+
   // PHY interfaces
-`ifdef USE_DDR4
-  `DDR4_INTF
+`ifdef TARGET_ZCU104
+  `TARGET_ZCU104_INTF
 `endif
+
 `ifdef USE_DDR3
   `DDR3_INTF
 `endif
@@ -52,6 +54,7 @@ module dram_wrapper_xilinx #(
     integer MaxUniqIds;
     integer MaxTxns;
   } dram_cfg_t;
+
 
 `ifdef TARGET_VCU128
   localparam dram_cfg_t cfg = '{
@@ -225,8 +228,9 @@ module dram_wrapper_xilinx #(
 `ifdef USE_DDR4
   ddr4 i_dram (
     // Reset
-    .sys_rst                    ( sys_rst_i    ),  // Active high
-    .c0_sys_clk_i               ( dram_clk_i   ),
+    .sys_rst                    ( sys_rst_i    ),  // Active high 
+    .c0_sys_clk_p               ( c0_sys_clk_p                 ),
+    .c0_sys_clk_n               ( c0_sys_clk_n                 ),
     .c0_ddr4_aresetn            ( soc_resetn_i ),
     // Clock and reset out
     .c0_ddr4_ui_clk             ( dram_axi_clk ),
@@ -271,24 +275,24 @@ module dram_wrapper_xilinx #(
     .c0_ddr4_s_axi_rvalid       ( cdc_dram_rsp.r_valid  ),
     // TODO: Shouldn't we map this to an external reg port?
     // AXI control
-    .c0_ddr4_s_axi_ctrl_awvalid ( '0 ),
-    .c0_ddr4_s_axi_ctrl_awready ( ),
-    .c0_ddr4_s_axi_ctrl_awaddr  ( '0 ),
-    .c0_ddr4_s_axi_ctrl_wvalid  ( '0 ),
-    .c0_ddr4_s_axi_ctrl_wready  ( ),
-    .c0_ddr4_s_axi_ctrl_wdata   ( '0 ),
-    .c0_ddr4_s_axi_ctrl_bvalid  ( ),
-    .c0_ddr4_s_axi_ctrl_bready  ( '0 ),
-    .c0_ddr4_s_axi_ctrl_bresp   ( ),
-    .c0_ddr4_s_axi_ctrl_arvalid ( '0 ),
-    .c0_ddr4_s_axi_ctrl_arready ( ),
-    .c0_ddr4_s_axi_ctrl_araddr  ( '0 ),
-    .c0_ddr4_s_axi_ctrl_rvalid  ( ),
-    .c0_ddr4_s_axi_ctrl_rready  ( '0 ),
-    .c0_ddr4_s_axi_ctrl_rdata   ( ),
-    .c0_ddr4_s_axi_ctrl_rresp   ( ),
-    .c0_ddr4_interrupt          ( ),
-    // Others
+    //.c0_ddr4_s_axi_ctrl_awvalid ( '0 ),
+    //.c0_ddr4_s_axi_ctrl_awready ( ),
+    //.c0_ddr4_s_axi_ctrl_awaddr  ( '0 ),
+    //.c0_ddr4_s_axi_ctrl_wvalid  ( '0 ),
+    //.c0_ddr4_s_axi_ctrl_wready  ( ),
+    //.c0_ddr4_s_axi_ctrl_wdata   ( '0 ),
+    //.c0_ddr4_s_axi_ctrl_bvalid  ( ),
+    //.c0_ddr4_s_axi_ctrl_bready  ( '0 ),
+    //.c0_ddr4_s_axi_ctrl_bresp   ( ),
+    //.c0_ddr4_s_axi_ctrl_arvalid ( '0 ),
+    //.c0_ddr4_s_axi_ctrl_arready ( ),
+    //.c0_ddr4_s_axi_ctrl_araddr  ( '0 ),
+    //.c0_ddr4_s_axi_ctrl_rvalid  ( ),
+    //.c0_ddr4_s_axi_ctrl_rready  ( '0 ),
+    //.c0_ddr4_s_axi_ctrl_rdata   ( ),
+    //.c0_ddr4_s_axi_ctrl_rresp   ( ),
+    //.c0_ddr4_interrupt          ( ),
+    //Others
     .c0_init_calib_complete     ( ),
     .addn_ui_clkout1            ( dram_clk_o ),
     .dbg_clk                    ( ),
@@ -296,6 +300,7 @@ module dram_wrapper_xilinx #(
     // PHY
     .*
   );
+
 `endif
 
   /////////////////////////
