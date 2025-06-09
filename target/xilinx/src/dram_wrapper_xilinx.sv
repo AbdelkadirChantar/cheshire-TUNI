@@ -55,6 +55,18 @@ module dram_wrapper_xilinx #(
     integer MaxTxns;
   } dram_cfg_t;
 
+`ifdef TARGET_ZCU104
+  localparam dram_cfg_t cfg = '{
+    EnCdc         : 1,    // 333 MHz AXI (cf. CdcLogDepth)
+    CdcLogDepth   : 5,
+    IdWidth       : 8,
+    AddrWidth     : 32,
+    DataWidth     : 512,
+    StrobeWidth   : 64,
+    MaxUniqIds    : 8,    // TODO: suboptimal, but limited by CVA6/LLC
+    MaxTxns       : 24    // TODO: suboptimal, but limited by CVA6/LLC
+  };
+`endif
 
 `ifdef TARGET_VCU128
   localparam dram_cfg_t cfg = '{
