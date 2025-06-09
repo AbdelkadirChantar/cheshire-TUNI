@@ -2,15 +2,16 @@
 # Licensed under the Apache License, Version 2.0, see LICENSE for details.
 # SPDX-License-Identifier: Apache-2.0
 #
-# Abdelkadir Chantar <abdelkadir.chantar@tuni.fi>
 # Common OpenOCD script for Cheshire.
 #
+
+# Abdelkadir Chantar <abdelkadir.chantar@tuni.fi>
 # !!!: Must use exactly OpenOCD 0.12
 
 transport select jtag
-#gdb port 3333
-#telnet port disabled
-#tcl port disabled
+gdb_port 3333
+telnet_port disabled
+tcl_port disabled
 reset_config none
 
 set _CHIPNAME riscv

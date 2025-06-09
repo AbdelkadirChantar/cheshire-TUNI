@@ -2,7 +2,8 @@
 # Licensed under the Apache License, Version 2.0, see LICENSE for details.
 # SPDX-License-Identifier: Apache-2.0
 #
-# OpenOCD script for Cheshire on Genesys2.
+# Abdelkadir Chantar <abdelkadir.chantar@tuni.fi>
+# OpenOCD script for Cheshire on vcu118.
 adapter driver ftdi
 adapter serial FT5X1XMQ; # either comment out or modify to match adapter
 
