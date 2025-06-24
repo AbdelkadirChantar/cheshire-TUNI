@@ -1,0 +1,25 @@
+// Copyright 2024 ETH Zurich and University of Bologna.
+// Solderpad Hardware License, Version 0.51, see LICENSE for details.
+// SPDX-License-Identifier: SHL-0.51
+//
+// Abdelkadir Chantar <Abdelkadir.chantar@tuni.fi>
+
+/include/ "cheshire.dtsi"
+
+
+/ {
+    model = "Digilent ZCU104 custom RV SoC";
+    compatible = "digilent,zcu104", "xlnx,zynqmp";
+
+    memory@80000000 {
+        device_type = "memory";
+        reg = <0x0 0x80000000 0x0 0x40000000>; // 1 GiB
+    };
+
+    reserved-memory {
+        #address-cells = <2>;
+        #size-cells = <2>;
+        ranges;
+        // Add if you reserve space (e.g. framebuffer, firmware, etc.)
+    };
+};
