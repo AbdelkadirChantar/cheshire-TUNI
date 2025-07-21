@@ -174,7 +174,7 @@ switch $proj {
                     CONFIG.CLK_OUT2_PORT {clk_48} \
                     CONFIG.CLK_OUT3_PORT {clk_20} \
                     CONFIG.CLK_OUT4_PORT {clk_10} \
-                    CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {10.000} \
+                    CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {50.000} \
                     CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {48.000} \
                     CONFIG.CLKOUT3_REQUESTED_OUT_FREQ {20.000} \
                     CONFIG.CLKOUT4_REQUESTED_OUT_FREQ {10.000} \

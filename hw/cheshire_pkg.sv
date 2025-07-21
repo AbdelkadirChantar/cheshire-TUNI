@@ -568,7 +568,7 @@ package cheshire_pkg;
     Cva6ExtCieLength  : 'h2000_0000,  // [0x2.., 0x4..) is CIE, [0x4.., 0x8..) is non-CIE
     Cva6ExtCieOnTop   : 0,
     // Harts
-    NumCores          : 1,
+    NumCores          : 2,
     CoreMaxTxns       : 8,
     CoreMaxTxnsPerId  : 4,
     CoreUserAmoOffs   : 0, // Convention: lower AMO bits for cores, MSB for serial link
@@ -620,7 +620,7 @@ package cheshire_pkg;
     DbgAmoNumCuts     : 1,
     DbgAmoPostCut     : 1,
     // LLC: 128 KiB, up to 2 GiB DRAM
-    LlcNotBypass      : 1,
+    LlcNotBypass      : 0,
     LlcSetAssoc       : 8,
     LlcNumLines       : 256,
     LlcNumBlocks      : 8,
