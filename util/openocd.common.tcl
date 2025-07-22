@@ -20,7 +20,6 @@ jtag newtap $_CHIPNAME cpu -irlen ${irlen} -expected-id 0x1c5e5db3
 set _TARGETNAME0 $_CHIPNAME.cpu0
 target create $_TARGETNAME0 riscv -chain-position $_CHIPNAME.cpu -coreid 0
 
-# Note: You can add more cores by incrementing the coreid and target name
 set _TARGETNAME1 $_CHIPNAME.cpu1
 target create $_TARGETNAME1 riscv -chain-position $_CHIPNAME.cpu -coreid 1
 
