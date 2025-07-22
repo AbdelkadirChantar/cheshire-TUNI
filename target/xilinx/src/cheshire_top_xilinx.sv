@@ -11,6 +11,13 @@
 `include "cheshire/typedef.svh"
 `include "phy_definitions.svh"
 
+`define USE_RESETN 1                                                                                                                  
+`define USE_JTAG   1                                                                                                                    
+`define USE_JTAG_TRSTN 1                                                                                                                
+// `define USE_JTAG_VDDGND 1                                                                                                           
+`define USE_DDR4 1
+`define TARGET_ZCU104 1 
+
 // TODO: Expose more IO: unused SPI CS, Serial Link, etc.
 
 

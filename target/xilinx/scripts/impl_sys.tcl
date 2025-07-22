@@ -29,7 +29,7 @@ update_compile_order -fileset sources_1
 # Set synthesis properties
 # TODO: investigate resource-affordable retiming
 set_property XPM_LIBRARIES XPM_MEMORY [current_project]
-set_property strategy Flow_PerfOptimized_high [get_runs synth_1]
+set_property strategy Flow_AreaOptimized_high [get_runs synth_1]
 
 # Elaborate and open design to explore all clocks
 synth_design -rtl -name rtl_1
@@ -47,8 +47,14 @@ gen_reports ${project_root}/reports.synth
 # TODO: debug this
 insert_ilas {soc_clk}
 
+# Reset impl_1 if already created
+reset_run impl_1
+
 # Set implementation properties
-set_property strategy Performance_ExtraTimingOpt [get_runs impl_1]
+set_property strategy Area_Explore [get_runs impl_1]
+set_property STEPS.opt_design.is_enabled true [get_runs impl_1]
+set_property STEPS.post_place_phys_opt_design.is_enabled true [get_runs impl_1]
+set_property STEPS.post_route_phys_opt_design.is_enabled true [get_runs impl_1]
 
 # Implementation
 launch_runs -jobs $num_jobs impl_1 -to_step write_bitstream
