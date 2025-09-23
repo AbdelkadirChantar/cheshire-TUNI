@@ -73,6 +73,15 @@ set_property -dict {PACKAGE_PIN F5 IOSTANDARD LVCMOS12} [get_ports boot_mode_i[1
 # Active high reset
 set_property -dict {PACKAGE_PIN E4 IOSTANDARD LVCMOS33} [get_ports sys_resetn];
 
+# SD Card, SPI mode
+set_property -dict {PACKAGE_PIN M8 IOSTANDARD LVCMOS33 }  [get_ports sd_sclk_o   ];# "PMOD1 - PIN6"
+set_property -dict {PACKAGE_PIN J9 IOSTANDARD LVCMOS33 }  [get_ports sd_cd_i     ];# "PMOD1 - PIN1"
+set_property -dict {PACKAGE_PIN M10 IOSTANDARD LVCMOS33}  [get_ports sd_cmd_o    ];# "PMOD1 - PIN4"
+set_property -dict {PACKAGE_PIN L8 IOSTANDARD LVCMOS33 }  [get_ports {sd_d_io[0]}];# "PMOD1 - PIN7"
+#set_property -dict {PACKAGE_PIN K8 IOSTANDARD LVCMOS33 }  [get_ports {sd_d_io[1]}];# "PMOD1 - PIN5"
+#set_property -dict {PACKAGE_PIN K9 IOSTANDARD LVCMOS33 }  [get_ports {sd_d_io[2]}];# "PMOD1 - PIN3"
+set_property -dict {PACKAGE_PIN M9 IOSTANDARD LVCMOS33 }  [get_ports {sd_d_io[3]}];# "PMOD1 - PIN8"
+
 
 ########
 # DRAM #

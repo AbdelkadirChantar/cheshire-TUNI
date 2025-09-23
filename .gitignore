@@ -53,3 +53,4 @@ target/xilinx/build
 target/xilinx/out
 target/xilinx/scripts/add_sources.*
 vivado*
+zcu104.log
